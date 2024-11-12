@@ -11,9 +11,13 @@ export class BaseTodo {
   @Column()
   description: string;
 
+  @Column({ default: false }) // 기본값 설정
   @Column()
-  dueDate: Date;
+  completed: boolean;
 
   @Column({ nullable: true })
   alarmTime?: Date;
+
+  @Column()
+  dueDate: Date; // 기존 dueDate 유지
 }

@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  Patch,
+  Delete,
+} from '@nestjs/common';
 import { TodoService } from '../services/todo.service';
 import { TodoAlarmService } from '../services/todo-alarm.service';
 import { CreateTodoDto } from '../dto/create-todo.dto';
@@ -26,11 +35,29 @@ export class TodoController {
     return await this.todoService.searchTodos(keyword);
   }
 
+  @Get()
+  async findAllTodos(): Promise<BaseTodo[]> {
+    return await this.todoService.findAllTodos();
+  }
+
   @Post(':id/alarm')
   async setAlarm(
     @Param('id') id: string,
     @Body('alarmTime') alarmTime: Date,
   ): Promise<void> {
     await this.todoAlarmService.setAlarm(id, alarmTime);
+  }
+
+  @Patch(':id/completed')
+  async updateCompletionStatus(
+    @Param('id') id: string,
+    @Body('completed') completed: boolean,
+  ) {
+    return await this.todoService.updateTodoCompletion(id, completed);
+  }
+
+  @Delete(':id')
+  async deleteTodo(@Param('id') id: string): Promise<void> {
+    await this.todoService.deleteTodo(id);
   }
 }

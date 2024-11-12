@@ -1,4 +1,10 @@
-import { IsDate, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsDate,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsBoolean,
+} from 'class-validator';
 
 export class CreateTodoDto {
   @IsString()
@@ -7,6 +13,14 @@ export class CreateTodoDto {
 
   @IsString()
   description: string;
+
+  @IsBoolean()
+  @IsOptional()
+  completed?: boolean;
+
+  @IsDate()
+  @IsOptional()
+  alarmTime?: Date;
 
   @IsDate()
   dueDate: Date;
