@@ -7,9 +7,9 @@ import { TodoModule } from './good-todo/todo.module';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
-      port: 5432,
+      port: 0,
       username: 'test',
-      password: '2578',
+      password: '',
       database: 'myApp',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
